@@ -12,5 +12,6 @@ buildNumber.properties
 
 .idea/
 .mvn/
-*Proto.java
 certs/
+/src/main/protobuf/
+*.proto
