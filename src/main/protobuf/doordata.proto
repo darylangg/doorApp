@@ -1,0 +1,66 @@
+syntax = "proto3";
+package door;
+
+option java_package = "org.door.common.protobuf";
+option java_outer_classname = "DoorDataProto";
+option csharp_namespace = "DoorDataProto";
+
+enum Status // Door status
+{
+  UNKNOWN=0;
+  OPEN=1;
+  CLOSE=2;
+}
+
+enum DoorHealth // Door Health Status
+{
+  UNAVAILABLE=0;
+  NORMAL=1;
+  ALARM=2;
+}
+
+message DoorReading // Single Door Reading
+{
+  string doorName=1;
+  Status status=2;
+  DoorHealth doorHealth=3;
+  bool isMechanized=4;
+  int64 readingDatetime=5;
+}
+
+message DoorData // Multiple door reading
+{
+  int64 timestamp=1;
+  int64 statusCode=2;
+  repeated DoorReading doorReading=3;
+}
+
+message AccessReading // Access attempt
+{
+  string doorName=1;
+  string cardID=2;
+  string event=3;
+  int64 readingDatetime=4;
+}
+
+message AccessData // Access attempt
+{
+  int64 timestamp=1;
+  int64 statusCode=2;
+  repeated AccessReading doorReading=3;
+}
+
+message RPCRequest // To send RPC request
+{
+  string requestID=1;
+  repeated string doorName=2;
+  string groupName=3;
+  string statusToSet=4;
+}
+
+message RPCReply // To send RPC reply
+{
+  string requestID=1;
+  repeated DoorReading doorName=2;
+  int64 statusCode=3;
+}

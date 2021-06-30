@@ -1,0 +1,18 @@
+syntax = "proto3";
+package door;
+
+option java_package = "org.door.common.protobuf";
+option java_outer_classname = "HeartbeatProto";
+option csharp_namespace = "HeartbeatProto";
+
+enum ConnectionStatus // connection status
+{
+  DISCONNECTED=0;
+  CONNECTED=1;
+}
+
+message Heartbeat // Heartbeats to services
+{
+  int64 timestamp=1;
+  map<string, ConnectionStatus> connections=2;
+}
