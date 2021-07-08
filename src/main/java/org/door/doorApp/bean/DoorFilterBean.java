@@ -30,9 +30,6 @@ public class DoorFilterBean {
         DoorDataProto.DoorData incomingData = DoorDataProto.DoorData.parseFrom(data);
         List<DoorDataProto.DoorReading> incomingDataReadings = incomingData.getDoorReadingList();
 
-        //TODO implement heartbeat
-//        HeartbeatBean.getInstance().updateSystemHeartbeat(incomingData);
-
         // initialization
         if (mappings.size() == 0){
             outgoingData = incomingData;
@@ -51,7 +48,7 @@ public class DoorFilterBean {
                 DoorDataProto.DoorReading existingReading = mappings.get(id);
 
                 // if they are the same
-                if (incomingReading.equals(existingReading)){
+                if (incomingReading.getStatus().equals(existingReading.getStatus())){
 //                    log.info("No change for Door "+ id);
                 } else {
                     // not the same

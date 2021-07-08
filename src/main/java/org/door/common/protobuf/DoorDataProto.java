@@ -4045,6 +4045,12 @@ public final class DoorDataProto {
      */
     com.google.protobuf.ByteString
         getStatusToSetBytes();
+
+    /**
+     * <code>int64 requestTime = 5;</code>
+     * @return The requestTime.
+     */
+    long getRequestTime();
   }
   /**
    * Protobuf type {@code door.RPCRequest}
@@ -4121,6 +4127,11 @@ public final class DoorDataProto {
               java.lang.String s = input.readStringRequireUtf8();
 
               statusToSet_ = s;
+              break;
+            }
+            case 40: {
+
+              requestTime_ = input.readInt64();
               break;
             }
             default: {
@@ -4307,6 +4318,17 @@ public final class DoorDataProto {
       }
     }
 
+    public static final int REQUESTTIME_FIELD_NUMBER = 5;
+    private long requestTime_;
+    /**
+     * <code>int64 requestTime = 5;</code>
+     * @return The requestTime.
+     */
+    @java.lang.Override
+    public long getRequestTime() {
+      return requestTime_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -4332,6 +4354,9 @@ public final class DoorDataProto {
       }
       if (!getStatusToSetBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 4, statusToSet_);
+      }
+      if (requestTime_ != 0L) {
+        output.writeInt64(5, requestTime_);
       }
       unknownFields.writeTo(output);
     }
@@ -4359,6 +4384,10 @@ public final class DoorDataProto {
       if (!getStatusToSetBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, statusToSet_);
       }
+      if (requestTime_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(5, requestTime_);
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -4382,6 +4411,8 @@ public final class DoorDataProto {
           .equals(other.getGroupName())) return false;
       if (!getStatusToSet()
           .equals(other.getStatusToSet())) return false;
+      if (getRequestTime()
+          != other.getRequestTime()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -4403,6 +4434,9 @@ public final class DoorDataProto {
       hash = (53 * hash) + getGroupName().hashCode();
       hash = (37 * hash) + STATUSTOSET_FIELD_NUMBER;
       hash = (53 * hash) + getStatusToSet().hashCode();
+      hash = (37 * hash) + REQUESTTIME_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getRequestTime());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -4544,6 +4578,8 @@ public final class DoorDataProto {
 
         statusToSet_ = "";
 
+        requestTime_ = 0L;
+
         return this;
       }
 
@@ -4579,6 +4615,7 @@ public final class DoorDataProto {
         result.doorName_ = doorName_;
         result.groupName_ = groupName_;
         result.statusToSet_ = statusToSet_;
+        result.requestTime_ = requestTime_;
         onBuilt();
         return result;
       }
@@ -4648,6 +4685,9 @@ public final class DoorDataProto {
         if (!other.getStatusToSet().isEmpty()) {
           statusToSet_ = other.statusToSet_;
           onChanged();
+        }
+        if (other.getRequestTime() != 0L) {
+          setRequestTime(other.getRequestTime());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -5016,6 +5056,37 @@ public final class DoorDataProto {
         onChanged();
         return this;
       }
+
+      private long requestTime_ ;
+      /**
+       * <code>int64 requestTime = 5;</code>
+       * @return The requestTime.
+       */
+      @java.lang.Override
+      public long getRequestTime() {
+        return requestTime_;
+      }
+      /**
+       * <code>int64 requestTime = 5;</code>
+       * @param value The requestTime to set.
+       * @return This builder for chaining.
+       */
+      public Builder setRequestTime(long value) {
+        
+        requestTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int64 requestTime = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearRequestTime() {
+        
+        requestTime_ = 0L;
+        onChanged();
+        return this;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -5086,34 +5157,64 @@ public final class DoorDataProto {
         getRequestIDBytes();
 
     /**
-     * <code>repeated .door.DoorReading doorName = 2;</code>
+     * <code>repeated .door.DoorReading successfulReadings = 2;</code>
      */
     java.util.List<org.door.common.protobuf.DoorDataProto.DoorReading> 
-        getDoorNameList();
+        getSuccessfulReadingsList();
     /**
-     * <code>repeated .door.DoorReading doorName = 2;</code>
+     * <code>repeated .door.DoorReading successfulReadings = 2;</code>
      */
-    org.door.common.protobuf.DoorDataProto.DoorReading getDoorName(int index);
+    org.door.common.protobuf.DoorDataProto.DoorReading getSuccessfulReadings(int index);
     /**
-     * <code>repeated .door.DoorReading doorName = 2;</code>
+     * <code>repeated .door.DoorReading successfulReadings = 2;</code>
      */
-    int getDoorNameCount();
+    int getSuccessfulReadingsCount();
     /**
-     * <code>repeated .door.DoorReading doorName = 2;</code>
+     * <code>repeated .door.DoorReading successfulReadings = 2;</code>
      */
     java.util.List<? extends org.door.common.protobuf.DoorDataProto.DoorReadingOrBuilder> 
-        getDoorNameOrBuilderList();
+        getSuccessfulReadingsOrBuilderList();
     /**
-     * <code>repeated .door.DoorReading doorName = 2;</code>
+     * <code>repeated .door.DoorReading successfulReadings = 2;</code>
      */
-    org.door.common.protobuf.DoorDataProto.DoorReadingOrBuilder getDoorNameOrBuilder(
+    org.door.common.protobuf.DoorDataProto.DoorReadingOrBuilder getSuccessfulReadingsOrBuilder(
         int index);
 
     /**
-     * <code>int64 statusCode = 3;</code>
+     * <code>repeated .door.DoorReading unsuccessfulReadings = 3;</code>
+     */
+    java.util.List<org.door.common.protobuf.DoorDataProto.DoorReading> 
+        getUnsuccessfulReadingsList();
+    /**
+     * <code>repeated .door.DoorReading unsuccessfulReadings = 3;</code>
+     */
+    org.door.common.protobuf.DoorDataProto.DoorReading getUnsuccessfulReadings(int index);
+    /**
+     * <code>repeated .door.DoorReading unsuccessfulReadings = 3;</code>
+     */
+    int getUnsuccessfulReadingsCount();
+    /**
+     * <code>repeated .door.DoorReading unsuccessfulReadings = 3;</code>
+     */
+    java.util.List<? extends org.door.common.protobuf.DoorDataProto.DoorReadingOrBuilder> 
+        getUnsuccessfulReadingsOrBuilderList();
+    /**
+     * <code>repeated .door.DoorReading unsuccessfulReadings = 3;</code>
+     */
+    org.door.common.protobuf.DoorDataProto.DoorReadingOrBuilder getUnsuccessfulReadingsOrBuilder(
+        int index);
+
+    /**
+     * <code>int64 statusCode = 4;</code>
      * @return The statusCode.
      */
     long getStatusCode();
+
+    /**
+     * <code>int64 replyTime = 5;</code>
+     * @return The replyTime.
+     */
+    long getReplyTime();
   }
   /**
    * Protobuf type {@code door.RPCReply}
@@ -5129,7 +5230,8 @@ public final class DoorDataProto {
     }
     private RPCReply() {
       requestID_ = "";
-      doorName_ = java.util.Collections.emptyList();
+      successfulReadings_ = java.util.Collections.emptyList();
+      unsuccessfulReadings_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -5171,16 +5273,30 @@ public final class DoorDataProto {
             }
             case 18: {
               if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                doorName_ = new java.util.ArrayList<org.door.common.protobuf.DoorDataProto.DoorReading>();
+                successfulReadings_ = new java.util.ArrayList<org.door.common.protobuf.DoorDataProto.DoorReading>();
                 mutable_bitField0_ |= 0x00000001;
               }
-              doorName_.add(
+              successfulReadings_.add(
                   input.readMessage(org.door.common.protobuf.DoorDataProto.DoorReading.parser(), extensionRegistry));
               break;
             }
-            case 24: {
+            case 26: {
+              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
+                unsuccessfulReadings_ = new java.util.ArrayList<org.door.common.protobuf.DoorDataProto.DoorReading>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              unsuccessfulReadings_.add(
+                  input.readMessage(org.door.common.protobuf.DoorDataProto.DoorReading.parser(), extensionRegistry));
+              break;
+            }
+            case 32: {
 
               statusCode_ = input.readInt64();
+              break;
+            }
+            case 40: {
+
+              replyTime_ = input.readInt64();
               break;
             }
             default: {
@@ -5199,7 +5315,10 @@ public final class DoorDataProto {
             e).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) != 0)) {
-          doorName_ = java.util.Collections.unmodifiableList(doorName_);
+          successfulReadings_ = java.util.Collections.unmodifiableList(successfulReadings_);
+        }
+        if (((mutable_bitField0_ & 0x00000002) != 0)) {
+          unsuccessfulReadings_ = java.util.Collections.unmodifiableList(unsuccessfulReadings_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -5256,55 +5375,106 @@ public final class DoorDataProto {
       }
     }
 
-    public static final int DOORNAME_FIELD_NUMBER = 2;
-    private java.util.List<org.door.common.protobuf.DoorDataProto.DoorReading> doorName_;
+    public static final int SUCCESSFULREADINGS_FIELD_NUMBER = 2;
+    private java.util.List<org.door.common.protobuf.DoorDataProto.DoorReading> successfulReadings_;
     /**
-     * <code>repeated .door.DoorReading doorName = 2;</code>
+     * <code>repeated .door.DoorReading successfulReadings = 2;</code>
      */
     @java.lang.Override
-    public java.util.List<org.door.common.protobuf.DoorDataProto.DoorReading> getDoorNameList() {
-      return doorName_;
+    public java.util.List<org.door.common.protobuf.DoorDataProto.DoorReading> getSuccessfulReadingsList() {
+      return successfulReadings_;
     }
     /**
-     * <code>repeated .door.DoorReading doorName = 2;</code>
+     * <code>repeated .door.DoorReading successfulReadings = 2;</code>
      */
     @java.lang.Override
     public java.util.List<? extends org.door.common.protobuf.DoorDataProto.DoorReadingOrBuilder> 
-        getDoorNameOrBuilderList() {
-      return doorName_;
+        getSuccessfulReadingsOrBuilderList() {
+      return successfulReadings_;
     }
     /**
-     * <code>repeated .door.DoorReading doorName = 2;</code>
+     * <code>repeated .door.DoorReading successfulReadings = 2;</code>
      */
     @java.lang.Override
-    public int getDoorNameCount() {
-      return doorName_.size();
+    public int getSuccessfulReadingsCount() {
+      return successfulReadings_.size();
     }
     /**
-     * <code>repeated .door.DoorReading doorName = 2;</code>
+     * <code>repeated .door.DoorReading successfulReadings = 2;</code>
      */
     @java.lang.Override
-    public org.door.common.protobuf.DoorDataProto.DoorReading getDoorName(int index) {
-      return doorName_.get(index);
+    public org.door.common.protobuf.DoorDataProto.DoorReading getSuccessfulReadings(int index) {
+      return successfulReadings_.get(index);
     }
     /**
-     * <code>repeated .door.DoorReading doorName = 2;</code>
+     * <code>repeated .door.DoorReading successfulReadings = 2;</code>
      */
     @java.lang.Override
-    public org.door.common.protobuf.DoorDataProto.DoorReadingOrBuilder getDoorNameOrBuilder(
+    public org.door.common.protobuf.DoorDataProto.DoorReadingOrBuilder getSuccessfulReadingsOrBuilder(
         int index) {
-      return doorName_.get(index);
+      return successfulReadings_.get(index);
     }
 
-    public static final int STATUSCODE_FIELD_NUMBER = 3;
+    public static final int UNSUCCESSFULREADINGS_FIELD_NUMBER = 3;
+    private java.util.List<org.door.common.protobuf.DoorDataProto.DoorReading> unsuccessfulReadings_;
+    /**
+     * <code>repeated .door.DoorReading unsuccessfulReadings = 3;</code>
+     */
+    @java.lang.Override
+    public java.util.List<org.door.common.protobuf.DoorDataProto.DoorReading> getUnsuccessfulReadingsList() {
+      return unsuccessfulReadings_;
+    }
+    /**
+     * <code>repeated .door.DoorReading unsuccessfulReadings = 3;</code>
+     */
+    @java.lang.Override
+    public java.util.List<? extends org.door.common.protobuf.DoorDataProto.DoorReadingOrBuilder> 
+        getUnsuccessfulReadingsOrBuilderList() {
+      return unsuccessfulReadings_;
+    }
+    /**
+     * <code>repeated .door.DoorReading unsuccessfulReadings = 3;</code>
+     */
+    @java.lang.Override
+    public int getUnsuccessfulReadingsCount() {
+      return unsuccessfulReadings_.size();
+    }
+    /**
+     * <code>repeated .door.DoorReading unsuccessfulReadings = 3;</code>
+     */
+    @java.lang.Override
+    public org.door.common.protobuf.DoorDataProto.DoorReading getUnsuccessfulReadings(int index) {
+      return unsuccessfulReadings_.get(index);
+    }
+    /**
+     * <code>repeated .door.DoorReading unsuccessfulReadings = 3;</code>
+     */
+    @java.lang.Override
+    public org.door.common.protobuf.DoorDataProto.DoorReadingOrBuilder getUnsuccessfulReadingsOrBuilder(
+        int index) {
+      return unsuccessfulReadings_.get(index);
+    }
+
+    public static final int STATUSCODE_FIELD_NUMBER = 4;
     private long statusCode_;
     /**
-     * <code>int64 statusCode = 3;</code>
+     * <code>int64 statusCode = 4;</code>
      * @return The statusCode.
      */
     @java.lang.Override
     public long getStatusCode() {
       return statusCode_;
+    }
+
+    public static final int REPLYTIME_FIELD_NUMBER = 5;
+    private long replyTime_;
+    /**
+     * <code>int64 replyTime = 5;</code>
+     * @return The replyTime.
+     */
+    @java.lang.Override
+    public long getReplyTime() {
+      return replyTime_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -5324,11 +5494,17 @@ public final class DoorDataProto {
       if (!getRequestIDBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, requestID_);
       }
-      for (int i = 0; i < doorName_.size(); i++) {
-        output.writeMessage(2, doorName_.get(i));
+      for (int i = 0; i < successfulReadings_.size(); i++) {
+        output.writeMessage(2, successfulReadings_.get(i));
+      }
+      for (int i = 0; i < unsuccessfulReadings_.size(); i++) {
+        output.writeMessage(3, unsuccessfulReadings_.get(i));
       }
       if (statusCode_ != 0L) {
-        output.writeInt64(3, statusCode_);
+        output.writeInt64(4, statusCode_);
+      }
+      if (replyTime_ != 0L) {
+        output.writeInt64(5, replyTime_);
       }
       unknownFields.writeTo(output);
     }
@@ -5342,13 +5518,21 @@ public final class DoorDataProto {
       if (!getRequestIDBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, requestID_);
       }
-      for (int i = 0; i < doorName_.size(); i++) {
+      for (int i = 0; i < successfulReadings_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, doorName_.get(i));
+          .computeMessageSize(2, successfulReadings_.get(i));
+      }
+      for (int i = 0; i < unsuccessfulReadings_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, unsuccessfulReadings_.get(i));
       }
       if (statusCode_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(3, statusCode_);
+          .computeInt64Size(4, statusCode_);
+      }
+      if (replyTime_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(5, replyTime_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -5367,10 +5551,14 @@ public final class DoorDataProto {
 
       if (!getRequestID()
           .equals(other.getRequestID())) return false;
-      if (!getDoorNameList()
-          .equals(other.getDoorNameList())) return false;
+      if (!getSuccessfulReadingsList()
+          .equals(other.getSuccessfulReadingsList())) return false;
+      if (!getUnsuccessfulReadingsList()
+          .equals(other.getUnsuccessfulReadingsList())) return false;
       if (getStatusCode()
           != other.getStatusCode()) return false;
+      if (getReplyTime()
+          != other.getReplyTime()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -5384,13 +5572,20 @@ public final class DoorDataProto {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + REQUESTID_FIELD_NUMBER;
       hash = (53 * hash) + getRequestID().hashCode();
-      if (getDoorNameCount() > 0) {
-        hash = (37 * hash) + DOORNAME_FIELD_NUMBER;
-        hash = (53 * hash) + getDoorNameList().hashCode();
+      if (getSuccessfulReadingsCount() > 0) {
+        hash = (37 * hash) + SUCCESSFULREADINGS_FIELD_NUMBER;
+        hash = (53 * hash) + getSuccessfulReadingsList().hashCode();
+      }
+      if (getUnsuccessfulReadingsCount() > 0) {
+        hash = (37 * hash) + UNSUCCESSFULREADINGS_FIELD_NUMBER;
+        hash = (53 * hash) + getUnsuccessfulReadingsList().hashCode();
       }
       hash = (37 * hash) + STATUSCODE_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getStatusCode());
+      hash = (37 * hash) + REPLYTIME_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getReplyTime());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -5519,7 +5714,8 @@ public final class DoorDataProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
-          getDoorNameFieldBuilder();
+          getSuccessfulReadingsFieldBuilder();
+          getUnsuccessfulReadingsFieldBuilder();
         }
       }
       @java.lang.Override
@@ -5527,13 +5723,21 @@ public final class DoorDataProto {
         super.clear();
         requestID_ = "";
 
-        if (doorNameBuilder_ == null) {
-          doorName_ = java.util.Collections.emptyList();
+        if (successfulReadingsBuilder_ == null) {
+          successfulReadings_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000001);
         } else {
-          doorNameBuilder_.clear();
+          successfulReadingsBuilder_.clear();
+        }
+        if (unsuccessfulReadingsBuilder_ == null) {
+          unsuccessfulReadings_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          unsuccessfulReadingsBuilder_.clear();
         }
         statusCode_ = 0L;
+
+        replyTime_ = 0L;
 
         return this;
       }
@@ -5563,16 +5767,26 @@ public final class DoorDataProto {
         org.door.common.protobuf.DoorDataProto.RPCReply result = new org.door.common.protobuf.DoorDataProto.RPCReply(this);
         int from_bitField0_ = bitField0_;
         result.requestID_ = requestID_;
-        if (doorNameBuilder_ == null) {
+        if (successfulReadingsBuilder_ == null) {
           if (((bitField0_ & 0x00000001) != 0)) {
-            doorName_ = java.util.Collections.unmodifiableList(doorName_);
+            successfulReadings_ = java.util.Collections.unmodifiableList(successfulReadings_);
             bitField0_ = (bitField0_ & ~0x00000001);
           }
-          result.doorName_ = doorName_;
+          result.successfulReadings_ = successfulReadings_;
         } else {
-          result.doorName_ = doorNameBuilder_.build();
+          result.successfulReadings_ = successfulReadingsBuilder_.build();
+        }
+        if (unsuccessfulReadingsBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) != 0)) {
+            unsuccessfulReadings_ = java.util.Collections.unmodifiableList(unsuccessfulReadings_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.unsuccessfulReadings_ = unsuccessfulReadings_;
+        } else {
+          result.unsuccessfulReadings_ = unsuccessfulReadingsBuilder_.build();
         }
         result.statusCode_ = statusCode_;
+        result.replyTime_ = replyTime_;
         onBuilt();
         return result;
       }
@@ -5625,34 +5839,63 @@ public final class DoorDataProto {
           requestID_ = other.requestID_;
           onChanged();
         }
-        if (doorNameBuilder_ == null) {
-          if (!other.doorName_.isEmpty()) {
-            if (doorName_.isEmpty()) {
-              doorName_ = other.doorName_;
+        if (successfulReadingsBuilder_ == null) {
+          if (!other.successfulReadings_.isEmpty()) {
+            if (successfulReadings_.isEmpty()) {
+              successfulReadings_ = other.successfulReadings_;
               bitField0_ = (bitField0_ & ~0x00000001);
             } else {
-              ensureDoorNameIsMutable();
-              doorName_.addAll(other.doorName_);
+              ensureSuccessfulReadingsIsMutable();
+              successfulReadings_.addAll(other.successfulReadings_);
             }
             onChanged();
           }
         } else {
-          if (!other.doorName_.isEmpty()) {
-            if (doorNameBuilder_.isEmpty()) {
-              doorNameBuilder_.dispose();
-              doorNameBuilder_ = null;
-              doorName_ = other.doorName_;
+          if (!other.successfulReadings_.isEmpty()) {
+            if (successfulReadingsBuilder_.isEmpty()) {
+              successfulReadingsBuilder_.dispose();
+              successfulReadingsBuilder_ = null;
+              successfulReadings_ = other.successfulReadings_;
               bitField0_ = (bitField0_ & ~0x00000001);
-              doorNameBuilder_ = 
+              successfulReadingsBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getDoorNameFieldBuilder() : null;
+                   getSuccessfulReadingsFieldBuilder() : null;
             } else {
-              doorNameBuilder_.addAllMessages(other.doorName_);
+              successfulReadingsBuilder_.addAllMessages(other.successfulReadings_);
+            }
+          }
+        }
+        if (unsuccessfulReadingsBuilder_ == null) {
+          if (!other.unsuccessfulReadings_.isEmpty()) {
+            if (unsuccessfulReadings_.isEmpty()) {
+              unsuccessfulReadings_ = other.unsuccessfulReadings_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureUnsuccessfulReadingsIsMutable();
+              unsuccessfulReadings_.addAll(other.unsuccessfulReadings_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.unsuccessfulReadings_.isEmpty()) {
+            if (unsuccessfulReadingsBuilder_.isEmpty()) {
+              unsuccessfulReadingsBuilder_.dispose();
+              unsuccessfulReadingsBuilder_ = null;
+              unsuccessfulReadings_ = other.unsuccessfulReadings_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              unsuccessfulReadingsBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getUnsuccessfulReadingsFieldBuilder() : null;
+            } else {
+              unsuccessfulReadingsBuilder_.addAllMessages(other.unsuccessfulReadings_);
             }
           }
         }
         if (other.getStatusCode() != 0L) {
           setStatusCode(other.getStatusCode());
+        }
+        if (other.getReplyTime() != 0L) {
+          setReplyTime(other.getReplyTime());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -5760,249 +6003,489 @@ public final class DoorDataProto {
         return this;
       }
 
-      private java.util.List<org.door.common.protobuf.DoorDataProto.DoorReading> doorName_ =
+      private java.util.List<org.door.common.protobuf.DoorDataProto.DoorReading> successfulReadings_ =
         java.util.Collections.emptyList();
-      private void ensureDoorNameIsMutable() {
+      private void ensureSuccessfulReadingsIsMutable() {
         if (!((bitField0_ & 0x00000001) != 0)) {
-          doorName_ = new java.util.ArrayList<org.door.common.protobuf.DoorDataProto.DoorReading>(doorName_);
+          successfulReadings_ = new java.util.ArrayList<org.door.common.protobuf.DoorDataProto.DoorReading>(successfulReadings_);
           bitField0_ |= 0x00000001;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          org.door.common.protobuf.DoorDataProto.DoorReading, org.door.common.protobuf.DoorDataProto.DoorReading.Builder, org.door.common.protobuf.DoorDataProto.DoorReadingOrBuilder> doorNameBuilder_;
+          org.door.common.protobuf.DoorDataProto.DoorReading, org.door.common.protobuf.DoorDataProto.DoorReading.Builder, org.door.common.protobuf.DoorDataProto.DoorReadingOrBuilder> successfulReadingsBuilder_;
 
       /**
-       * <code>repeated .door.DoorReading doorName = 2;</code>
+       * <code>repeated .door.DoorReading successfulReadings = 2;</code>
        */
-      public java.util.List<org.door.common.protobuf.DoorDataProto.DoorReading> getDoorNameList() {
-        if (doorNameBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(doorName_);
+      public java.util.List<org.door.common.protobuf.DoorDataProto.DoorReading> getSuccessfulReadingsList() {
+        if (successfulReadingsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(successfulReadings_);
         } else {
-          return doorNameBuilder_.getMessageList();
+          return successfulReadingsBuilder_.getMessageList();
         }
       }
       /**
-       * <code>repeated .door.DoorReading doorName = 2;</code>
+       * <code>repeated .door.DoorReading successfulReadings = 2;</code>
        */
-      public int getDoorNameCount() {
-        if (doorNameBuilder_ == null) {
-          return doorName_.size();
+      public int getSuccessfulReadingsCount() {
+        if (successfulReadingsBuilder_ == null) {
+          return successfulReadings_.size();
         } else {
-          return doorNameBuilder_.getCount();
+          return successfulReadingsBuilder_.getCount();
         }
       }
       /**
-       * <code>repeated .door.DoorReading doorName = 2;</code>
+       * <code>repeated .door.DoorReading successfulReadings = 2;</code>
        */
-      public org.door.common.protobuf.DoorDataProto.DoorReading getDoorName(int index) {
-        if (doorNameBuilder_ == null) {
-          return doorName_.get(index);
+      public org.door.common.protobuf.DoorDataProto.DoorReading getSuccessfulReadings(int index) {
+        if (successfulReadingsBuilder_ == null) {
+          return successfulReadings_.get(index);
         } else {
-          return doorNameBuilder_.getMessage(index);
+          return successfulReadingsBuilder_.getMessage(index);
         }
       }
       /**
-       * <code>repeated .door.DoorReading doorName = 2;</code>
+       * <code>repeated .door.DoorReading successfulReadings = 2;</code>
        */
-      public Builder setDoorName(
+      public Builder setSuccessfulReadings(
           int index, org.door.common.protobuf.DoorDataProto.DoorReading value) {
-        if (doorNameBuilder_ == null) {
+        if (successfulReadingsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureDoorNameIsMutable();
-          doorName_.set(index, value);
+          ensureSuccessfulReadingsIsMutable();
+          successfulReadings_.set(index, value);
           onChanged();
         } else {
-          doorNameBuilder_.setMessage(index, value);
+          successfulReadingsBuilder_.setMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .door.DoorReading doorName = 2;</code>
+       * <code>repeated .door.DoorReading successfulReadings = 2;</code>
        */
-      public Builder setDoorName(
+      public Builder setSuccessfulReadings(
           int index, org.door.common.protobuf.DoorDataProto.DoorReading.Builder builderForValue) {
-        if (doorNameBuilder_ == null) {
-          ensureDoorNameIsMutable();
-          doorName_.set(index, builderForValue.build());
+        if (successfulReadingsBuilder_ == null) {
+          ensureSuccessfulReadingsIsMutable();
+          successfulReadings_.set(index, builderForValue.build());
           onChanged();
         } else {
-          doorNameBuilder_.setMessage(index, builderForValue.build());
+          successfulReadingsBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .door.DoorReading doorName = 2;</code>
+       * <code>repeated .door.DoorReading successfulReadings = 2;</code>
        */
-      public Builder addDoorName(org.door.common.protobuf.DoorDataProto.DoorReading value) {
-        if (doorNameBuilder_ == null) {
+      public Builder addSuccessfulReadings(org.door.common.protobuf.DoorDataProto.DoorReading value) {
+        if (successfulReadingsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureDoorNameIsMutable();
-          doorName_.add(value);
+          ensureSuccessfulReadingsIsMutable();
+          successfulReadings_.add(value);
           onChanged();
         } else {
-          doorNameBuilder_.addMessage(value);
+          successfulReadingsBuilder_.addMessage(value);
         }
         return this;
       }
       /**
-       * <code>repeated .door.DoorReading doorName = 2;</code>
+       * <code>repeated .door.DoorReading successfulReadings = 2;</code>
        */
-      public Builder addDoorName(
+      public Builder addSuccessfulReadings(
           int index, org.door.common.protobuf.DoorDataProto.DoorReading value) {
-        if (doorNameBuilder_ == null) {
+        if (successfulReadingsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureDoorNameIsMutable();
-          doorName_.add(index, value);
+          ensureSuccessfulReadingsIsMutable();
+          successfulReadings_.add(index, value);
           onChanged();
         } else {
-          doorNameBuilder_.addMessage(index, value);
+          successfulReadingsBuilder_.addMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .door.DoorReading doorName = 2;</code>
+       * <code>repeated .door.DoorReading successfulReadings = 2;</code>
        */
-      public Builder addDoorName(
+      public Builder addSuccessfulReadings(
           org.door.common.protobuf.DoorDataProto.DoorReading.Builder builderForValue) {
-        if (doorNameBuilder_ == null) {
-          ensureDoorNameIsMutable();
-          doorName_.add(builderForValue.build());
+        if (successfulReadingsBuilder_ == null) {
+          ensureSuccessfulReadingsIsMutable();
+          successfulReadings_.add(builderForValue.build());
           onChanged();
         } else {
-          doorNameBuilder_.addMessage(builderForValue.build());
+          successfulReadingsBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .door.DoorReading doorName = 2;</code>
+       * <code>repeated .door.DoorReading successfulReadings = 2;</code>
        */
-      public Builder addDoorName(
+      public Builder addSuccessfulReadings(
           int index, org.door.common.protobuf.DoorDataProto.DoorReading.Builder builderForValue) {
-        if (doorNameBuilder_ == null) {
-          ensureDoorNameIsMutable();
-          doorName_.add(index, builderForValue.build());
+        if (successfulReadingsBuilder_ == null) {
+          ensureSuccessfulReadingsIsMutable();
+          successfulReadings_.add(index, builderForValue.build());
           onChanged();
         } else {
-          doorNameBuilder_.addMessage(index, builderForValue.build());
+          successfulReadingsBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .door.DoorReading doorName = 2;</code>
+       * <code>repeated .door.DoorReading successfulReadings = 2;</code>
        */
-      public Builder addAllDoorName(
+      public Builder addAllSuccessfulReadings(
           java.lang.Iterable<? extends org.door.common.protobuf.DoorDataProto.DoorReading> values) {
-        if (doorNameBuilder_ == null) {
-          ensureDoorNameIsMutable();
+        if (successfulReadingsBuilder_ == null) {
+          ensureSuccessfulReadingsIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, doorName_);
+              values, successfulReadings_);
           onChanged();
         } else {
-          doorNameBuilder_.addAllMessages(values);
+          successfulReadingsBuilder_.addAllMessages(values);
         }
         return this;
       }
       /**
-       * <code>repeated .door.DoorReading doorName = 2;</code>
+       * <code>repeated .door.DoorReading successfulReadings = 2;</code>
        */
-      public Builder clearDoorName() {
-        if (doorNameBuilder_ == null) {
-          doorName_ = java.util.Collections.emptyList();
+      public Builder clearSuccessfulReadings() {
+        if (successfulReadingsBuilder_ == null) {
+          successfulReadings_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000001);
           onChanged();
         } else {
-          doorNameBuilder_.clear();
+          successfulReadingsBuilder_.clear();
         }
         return this;
       }
       /**
-       * <code>repeated .door.DoorReading doorName = 2;</code>
+       * <code>repeated .door.DoorReading successfulReadings = 2;</code>
        */
-      public Builder removeDoorName(int index) {
-        if (doorNameBuilder_ == null) {
-          ensureDoorNameIsMutable();
-          doorName_.remove(index);
+      public Builder removeSuccessfulReadings(int index) {
+        if (successfulReadingsBuilder_ == null) {
+          ensureSuccessfulReadingsIsMutable();
+          successfulReadings_.remove(index);
           onChanged();
         } else {
-          doorNameBuilder_.remove(index);
+          successfulReadingsBuilder_.remove(index);
         }
         return this;
       }
       /**
-       * <code>repeated .door.DoorReading doorName = 2;</code>
+       * <code>repeated .door.DoorReading successfulReadings = 2;</code>
        */
-      public org.door.common.protobuf.DoorDataProto.DoorReading.Builder getDoorNameBuilder(
+      public org.door.common.protobuf.DoorDataProto.DoorReading.Builder getSuccessfulReadingsBuilder(
           int index) {
-        return getDoorNameFieldBuilder().getBuilder(index);
+        return getSuccessfulReadingsFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .door.DoorReading doorName = 2;</code>
+       * <code>repeated .door.DoorReading successfulReadings = 2;</code>
        */
-      public org.door.common.protobuf.DoorDataProto.DoorReadingOrBuilder getDoorNameOrBuilder(
+      public org.door.common.protobuf.DoorDataProto.DoorReadingOrBuilder getSuccessfulReadingsOrBuilder(
           int index) {
-        if (doorNameBuilder_ == null) {
-          return doorName_.get(index);  } else {
-          return doorNameBuilder_.getMessageOrBuilder(index);
+        if (successfulReadingsBuilder_ == null) {
+          return successfulReadings_.get(index);  } else {
+          return successfulReadingsBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>repeated .door.DoorReading doorName = 2;</code>
+       * <code>repeated .door.DoorReading successfulReadings = 2;</code>
        */
       public java.util.List<? extends org.door.common.protobuf.DoorDataProto.DoorReadingOrBuilder> 
-           getDoorNameOrBuilderList() {
-        if (doorNameBuilder_ != null) {
-          return doorNameBuilder_.getMessageOrBuilderList();
+           getSuccessfulReadingsOrBuilderList() {
+        if (successfulReadingsBuilder_ != null) {
+          return successfulReadingsBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(doorName_);
+          return java.util.Collections.unmodifiableList(successfulReadings_);
         }
       }
       /**
-       * <code>repeated .door.DoorReading doorName = 2;</code>
+       * <code>repeated .door.DoorReading successfulReadings = 2;</code>
        */
-      public org.door.common.protobuf.DoorDataProto.DoorReading.Builder addDoorNameBuilder() {
-        return getDoorNameFieldBuilder().addBuilder(
+      public org.door.common.protobuf.DoorDataProto.DoorReading.Builder addSuccessfulReadingsBuilder() {
+        return getSuccessfulReadingsFieldBuilder().addBuilder(
             org.door.common.protobuf.DoorDataProto.DoorReading.getDefaultInstance());
       }
       /**
-       * <code>repeated .door.DoorReading doorName = 2;</code>
+       * <code>repeated .door.DoorReading successfulReadings = 2;</code>
        */
-      public org.door.common.protobuf.DoorDataProto.DoorReading.Builder addDoorNameBuilder(
+      public org.door.common.protobuf.DoorDataProto.DoorReading.Builder addSuccessfulReadingsBuilder(
           int index) {
-        return getDoorNameFieldBuilder().addBuilder(
+        return getSuccessfulReadingsFieldBuilder().addBuilder(
             index, org.door.common.protobuf.DoorDataProto.DoorReading.getDefaultInstance());
       }
       /**
-       * <code>repeated .door.DoorReading doorName = 2;</code>
+       * <code>repeated .door.DoorReading successfulReadings = 2;</code>
        */
       public java.util.List<org.door.common.protobuf.DoorDataProto.DoorReading.Builder> 
-           getDoorNameBuilderList() {
-        return getDoorNameFieldBuilder().getBuilderList();
+           getSuccessfulReadingsBuilderList() {
+        return getSuccessfulReadingsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
           org.door.common.protobuf.DoorDataProto.DoorReading, org.door.common.protobuf.DoorDataProto.DoorReading.Builder, org.door.common.protobuf.DoorDataProto.DoorReadingOrBuilder> 
-          getDoorNameFieldBuilder() {
-        if (doorNameBuilder_ == null) {
-          doorNameBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+          getSuccessfulReadingsFieldBuilder() {
+        if (successfulReadingsBuilder_ == null) {
+          successfulReadingsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               org.door.common.protobuf.DoorDataProto.DoorReading, org.door.common.protobuf.DoorDataProto.DoorReading.Builder, org.door.common.protobuf.DoorDataProto.DoorReadingOrBuilder>(
-                  doorName_,
+                  successfulReadings_,
                   ((bitField0_ & 0x00000001) != 0),
                   getParentForChildren(),
                   isClean());
-          doorName_ = null;
+          successfulReadings_ = null;
         }
-        return doorNameBuilder_;
+        return successfulReadingsBuilder_;
+      }
+
+      private java.util.List<org.door.common.protobuf.DoorDataProto.DoorReading> unsuccessfulReadings_ =
+        java.util.Collections.emptyList();
+      private void ensureUnsuccessfulReadingsIsMutable() {
+        if (!((bitField0_ & 0x00000002) != 0)) {
+          unsuccessfulReadings_ = new java.util.ArrayList<org.door.common.protobuf.DoorDataProto.DoorReading>(unsuccessfulReadings_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          org.door.common.protobuf.DoorDataProto.DoorReading, org.door.common.protobuf.DoorDataProto.DoorReading.Builder, org.door.common.protobuf.DoorDataProto.DoorReadingOrBuilder> unsuccessfulReadingsBuilder_;
+
+      /**
+       * <code>repeated .door.DoorReading unsuccessfulReadings = 3;</code>
+       */
+      public java.util.List<org.door.common.protobuf.DoorDataProto.DoorReading> getUnsuccessfulReadingsList() {
+        if (unsuccessfulReadingsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(unsuccessfulReadings_);
+        } else {
+          return unsuccessfulReadingsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .door.DoorReading unsuccessfulReadings = 3;</code>
+       */
+      public int getUnsuccessfulReadingsCount() {
+        if (unsuccessfulReadingsBuilder_ == null) {
+          return unsuccessfulReadings_.size();
+        } else {
+          return unsuccessfulReadingsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .door.DoorReading unsuccessfulReadings = 3;</code>
+       */
+      public org.door.common.protobuf.DoorDataProto.DoorReading getUnsuccessfulReadings(int index) {
+        if (unsuccessfulReadingsBuilder_ == null) {
+          return unsuccessfulReadings_.get(index);
+        } else {
+          return unsuccessfulReadingsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .door.DoorReading unsuccessfulReadings = 3;</code>
+       */
+      public Builder setUnsuccessfulReadings(
+          int index, org.door.common.protobuf.DoorDataProto.DoorReading value) {
+        if (unsuccessfulReadingsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUnsuccessfulReadingsIsMutable();
+          unsuccessfulReadings_.set(index, value);
+          onChanged();
+        } else {
+          unsuccessfulReadingsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .door.DoorReading unsuccessfulReadings = 3;</code>
+       */
+      public Builder setUnsuccessfulReadings(
+          int index, org.door.common.protobuf.DoorDataProto.DoorReading.Builder builderForValue) {
+        if (unsuccessfulReadingsBuilder_ == null) {
+          ensureUnsuccessfulReadingsIsMutable();
+          unsuccessfulReadings_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          unsuccessfulReadingsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .door.DoorReading unsuccessfulReadings = 3;</code>
+       */
+      public Builder addUnsuccessfulReadings(org.door.common.protobuf.DoorDataProto.DoorReading value) {
+        if (unsuccessfulReadingsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUnsuccessfulReadingsIsMutable();
+          unsuccessfulReadings_.add(value);
+          onChanged();
+        } else {
+          unsuccessfulReadingsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .door.DoorReading unsuccessfulReadings = 3;</code>
+       */
+      public Builder addUnsuccessfulReadings(
+          int index, org.door.common.protobuf.DoorDataProto.DoorReading value) {
+        if (unsuccessfulReadingsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUnsuccessfulReadingsIsMutable();
+          unsuccessfulReadings_.add(index, value);
+          onChanged();
+        } else {
+          unsuccessfulReadingsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .door.DoorReading unsuccessfulReadings = 3;</code>
+       */
+      public Builder addUnsuccessfulReadings(
+          org.door.common.protobuf.DoorDataProto.DoorReading.Builder builderForValue) {
+        if (unsuccessfulReadingsBuilder_ == null) {
+          ensureUnsuccessfulReadingsIsMutable();
+          unsuccessfulReadings_.add(builderForValue.build());
+          onChanged();
+        } else {
+          unsuccessfulReadingsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .door.DoorReading unsuccessfulReadings = 3;</code>
+       */
+      public Builder addUnsuccessfulReadings(
+          int index, org.door.common.protobuf.DoorDataProto.DoorReading.Builder builderForValue) {
+        if (unsuccessfulReadingsBuilder_ == null) {
+          ensureUnsuccessfulReadingsIsMutable();
+          unsuccessfulReadings_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          unsuccessfulReadingsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .door.DoorReading unsuccessfulReadings = 3;</code>
+       */
+      public Builder addAllUnsuccessfulReadings(
+          java.lang.Iterable<? extends org.door.common.protobuf.DoorDataProto.DoorReading> values) {
+        if (unsuccessfulReadingsBuilder_ == null) {
+          ensureUnsuccessfulReadingsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, unsuccessfulReadings_);
+          onChanged();
+        } else {
+          unsuccessfulReadingsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .door.DoorReading unsuccessfulReadings = 3;</code>
+       */
+      public Builder clearUnsuccessfulReadings() {
+        if (unsuccessfulReadingsBuilder_ == null) {
+          unsuccessfulReadings_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          unsuccessfulReadingsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .door.DoorReading unsuccessfulReadings = 3;</code>
+       */
+      public Builder removeUnsuccessfulReadings(int index) {
+        if (unsuccessfulReadingsBuilder_ == null) {
+          ensureUnsuccessfulReadingsIsMutable();
+          unsuccessfulReadings_.remove(index);
+          onChanged();
+        } else {
+          unsuccessfulReadingsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .door.DoorReading unsuccessfulReadings = 3;</code>
+       */
+      public org.door.common.protobuf.DoorDataProto.DoorReading.Builder getUnsuccessfulReadingsBuilder(
+          int index) {
+        return getUnsuccessfulReadingsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .door.DoorReading unsuccessfulReadings = 3;</code>
+       */
+      public org.door.common.protobuf.DoorDataProto.DoorReadingOrBuilder getUnsuccessfulReadingsOrBuilder(
+          int index) {
+        if (unsuccessfulReadingsBuilder_ == null) {
+          return unsuccessfulReadings_.get(index);  } else {
+          return unsuccessfulReadingsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .door.DoorReading unsuccessfulReadings = 3;</code>
+       */
+      public java.util.List<? extends org.door.common.protobuf.DoorDataProto.DoorReadingOrBuilder> 
+           getUnsuccessfulReadingsOrBuilderList() {
+        if (unsuccessfulReadingsBuilder_ != null) {
+          return unsuccessfulReadingsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(unsuccessfulReadings_);
+        }
+      }
+      /**
+       * <code>repeated .door.DoorReading unsuccessfulReadings = 3;</code>
+       */
+      public org.door.common.protobuf.DoorDataProto.DoorReading.Builder addUnsuccessfulReadingsBuilder() {
+        return getUnsuccessfulReadingsFieldBuilder().addBuilder(
+            org.door.common.protobuf.DoorDataProto.DoorReading.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .door.DoorReading unsuccessfulReadings = 3;</code>
+       */
+      public org.door.common.protobuf.DoorDataProto.DoorReading.Builder addUnsuccessfulReadingsBuilder(
+          int index) {
+        return getUnsuccessfulReadingsFieldBuilder().addBuilder(
+            index, org.door.common.protobuf.DoorDataProto.DoorReading.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .door.DoorReading unsuccessfulReadings = 3;</code>
+       */
+      public java.util.List<org.door.common.protobuf.DoorDataProto.DoorReading.Builder> 
+           getUnsuccessfulReadingsBuilderList() {
+        return getUnsuccessfulReadingsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          org.door.common.protobuf.DoorDataProto.DoorReading, org.door.common.protobuf.DoorDataProto.DoorReading.Builder, org.door.common.protobuf.DoorDataProto.DoorReadingOrBuilder> 
+          getUnsuccessfulReadingsFieldBuilder() {
+        if (unsuccessfulReadingsBuilder_ == null) {
+          unsuccessfulReadingsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              org.door.common.protobuf.DoorDataProto.DoorReading, org.door.common.protobuf.DoorDataProto.DoorReading.Builder, org.door.common.protobuf.DoorDataProto.DoorReadingOrBuilder>(
+                  unsuccessfulReadings_,
+                  ((bitField0_ & 0x00000002) != 0),
+                  getParentForChildren(),
+                  isClean());
+          unsuccessfulReadings_ = null;
+        }
+        return unsuccessfulReadingsBuilder_;
       }
 
       private long statusCode_ ;
       /**
-       * <code>int64 statusCode = 3;</code>
+       * <code>int64 statusCode = 4;</code>
        * @return The statusCode.
        */
       @java.lang.Override
@@ -6010,7 +6493,7 @@ public final class DoorDataProto {
         return statusCode_;
       }
       /**
-       * <code>int64 statusCode = 3;</code>
+       * <code>int64 statusCode = 4;</code>
        * @param value The statusCode to set.
        * @return This builder for chaining.
        */
@@ -6021,12 +6504,43 @@ public final class DoorDataProto {
         return this;
       }
       /**
-       * <code>int64 statusCode = 3;</code>
+       * <code>int64 statusCode = 4;</code>
        * @return This builder for chaining.
        */
       public Builder clearStatusCode() {
         
         statusCode_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long replyTime_ ;
+      /**
+       * <code>int64 replyTime = 5;</code>
+       * @return The replyTime.
+       */
+      @java.lang.Override
+      public long getReplyTime() {
+        return replyTime_;
+      }
+      /**
+       * <code>int64 replyTime = 5;</code>
+       * @param value The replyTime to set.
+       * @return This builder for chaining.
+       */
+      public Builder setReplyTime(long value) {
+        
+        replyTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int64 replyTime = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearReplyTime() {
+        
+        replyTime_ = 0L;
         onChanged();
         return this;
       }
@@ -6133,15 +6647,18 @@ public final class DoorDataProto {
       "nt\030\003 \001(\t\022\027\n\017readingDatetime\030\004 \001(\003\"]\n\nAcc" +
       "essData\022\021\n\ttimestamp\030\001 \001(\003\022\022\n\nstatusCode" +
       "\030\002 \001(\003\022(\n\013doorReading\030\003 \003(\0132\023.door.Acces" +
-      "sReading\"Y\n\nRPCRequest\022\021\n\trequestID\030\001 \001(" +
+      "sReading\"n\n\nRPCRequest\022\021\n\trequestID\030\001 \001(" +
       "\t\022\020\n\010doorName\030\002 \003(\t\022\021\n\tgroupName\030\003 \001(\t\022\023" +
-      "\n\013statusToSet\030\004 \001(\t\"V\n\010RPCReply\022\021\n\treque" +
-      "stID\030\001 \001(\t\022#\n\010doorName\030\002 \003(\0132\021.door.Door" +
-      "Reading\022\022\n\nstatusCode\030\003 \001(\003**\n\006Status\022\013\n" +
-      "\007UNKNOWN\020\000\022\010\n\004OPEN\020\001\022\t\n\005CLOSE\020\002*4\n\nDoorH" +
-      "ealth\022\017\n\013UNAVAILABLE\020\000\022\n\n\006NORMAL\020\001\022\t\n\005AL" +
-      "ARM\020\002B9\n\030org.door.common.protobufB\rDoorD" +
-      "ataProto\252\002\rDoorDataProtob\006proto3"
+      "\n\013statusToSet\030\004 \001(\t\022\023\n\013requestTime\030\005 \001(\003" +
+      "\"\244\001\n\010RPCReply\022\021\n\trequestID\030\001 \001(\t\022-\n\022succ" +
+      "essfulReadings\030\002 \003(\0132\021.door.DoorReading\022" +
+      "/\n\024unsuccessfulReadings\030\003 \003(\0132\021.door.Doo" +
+      "rReading\022\022\n\nstatusCode\030\004 \001(\003\022\021\n\treplyTim" +
+      "e\030\005 \001(\003**\n\006Status\022\013\n\007UNKNOWN\020\000\022\010\n\004OPEN\020\001" +
+      "\022\t\n\005CLOSE\020\002*4\n\nDoorHealth\022\017\n\013UNAVAILABLE" +
+      "\020\000\022\n\n\006NORMAL\020\001\022\t\n\005ALARM\020\002B9\n\030org.door.co" +
+      "mmon.protobufB\rDoorDataProto\252\002\rDoorDataP" +
+      "rotob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -6176,13 +6693,13 @@ public final class DoorDataProto {
     internal_static_door_RPCRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_door_RPCRequest_descriptor,
-        new java.lang.String[] { "RequestID", "DoorName", "GroupName", "StatusToSet", });
+        new java.lang.String[] { "RequestID", "DoorName", "GroupName", "StatusToSet", "RequestTime", });
     internal_static_door_RPCReply_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_door_RPCReply_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_door_RPCReply_descriptor,
-        new java.lang.String[] { "RequestID", "DoorName", "StatusCode", });
+        new java.lang.String[] { "RequestID", "SuccessfulReadings", "UnsuccessfulReadings", "StatusCode", "ReplyTime", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

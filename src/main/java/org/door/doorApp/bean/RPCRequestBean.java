@@ -25,12 +25,12 @@ public class RPCRequestBean {
     }
 
     public void processRequest(byte[] data) throws InvalidProtocolBufferException {
-        long now = Instant.now().toEpochMilli()/1000;
-        String requestID = "door_"+now;
+//        long now = Instant.now().toEpochMilli()/1000;
+//        String requestID = "door_"+now;
         latestRequest = DoorDataProto.RPCRequest.parseFrom(data);
-        latestRequest = latestRequest.toBuilder()
-                .setRequestID(requestID)
-                .build();
+//        latestRequest = latestRequest.toBuilder()
+//                .setRequestID(requestID)
+//                .build();
     }
 
     public void JSONtoRequestProto(HashMap<String, List<String>> data){

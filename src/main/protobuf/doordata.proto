@@ -56,11 +56,14 @@ message RPCRequest // To send RPC request
   repeated string doorName=2;
   string groupName=3;
   string statusToSet=4;
+  int64 requestTime=5;
 }
 
 message RPCReply // To send RPC reply
 {
   string requestID=1;
-  repeated DoorReading doorName=2;
-  int64 statusCode=3;
+  repeated DoorReading successfulReadings=2;
+  repeated DoorReading unsuccessfulReadings=3;
+  int64 statusCode=4;
+  int64 replyTime=5;
 }
