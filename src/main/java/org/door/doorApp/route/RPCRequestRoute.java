@@ -17,14 +17,11 @@ public class RPCRequestRoute extends RouteBuilder {
     @Value("${door.routerKey.RPCControlRequest}")
     private String RPCRequestRoutingKey;
 
-    @Value("${door.queue.RPCControlRequest}")
-    private String RPCRequestQueue;
+    @Value("${door.web.queue.RPCControlRequest}")
+    private String webRPCRequestQueue;
 
-    @Value("${door.routerKey.RPCControlReply}")
-    private String RPCReplyRoutingKey;
-
-    @Value("${door.queue.RPCControlReply}")
-    private String RPCReplyQueue;
+    @Value("${door.app.queue.RPCControlRequest}")
+    private String appRPCRequestQueue;
 
     @Value("${door.database.api.host}")
     private String DBAPIHost;
@@ -37,7 +34,7 @@ public class RPCRequestRoute extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        from ("rabbitmq:"+exchange+"?routingKey="+RPCRequestRoutingKey+"&queue="+RPCRequestQueue+"&connectionFactory=#rabbitAppConnectionFactory")
+        from ("rabbitmq:"+exchange+"?routingKey="+RPCRequestRoutingKey+"&queue="+appRPCRequestQueue+"&connectionFactory=#rabbitAppConnectionFactory")
             .choice().when(method(HeartbeatBean.getInstance(),"servicesConnected"))
             // process body
             .routeId("RPC Request Route")
@@ -59,7 +56,7 @@ public class RPCRequestRoute extends RouteBuilder {
             .bean(RPCRequestBean.getInstance(),"getLatestRequest")
             .log("Sending Request")
             .setHeader("CamelRabbitmqRoutingKey",simple(RPCRequestRoutingKey))
-            .to("rabbitmq:"+exchange+"?queue="+ RPCRequestQueue +"&declare=false&connectionFactory=#rabbitWebConnectionFactory")
+            .to("rabbitmq:"+exchange+"?queue="+ webRPCRequestQueue +"&declare=false&connectionFactory=#rabbitWebConnectionFactory")
             .bean(RPCRequestBean.getInstance(), "prepareDBPayload")
             .marshal().json()
             .process(e->{

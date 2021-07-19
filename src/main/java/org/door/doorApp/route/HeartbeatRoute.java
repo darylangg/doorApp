@@ -7,15 +7,16 @@ import org.door.doorApp.bean.HeartbeatBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.sql.Timestamp;
-
 @Component
 public class HeartbeatRoute extends RouteBuilder {
     @Value("${door.exchange}")
     private String exchange;
 
-    @Value("${door.queue.heartbeat}")
-    private String heartbeatQueue;
+    @Value("${door.web.queue.heartbeat}")
+    private String webHeartbeatQueue;
+
+    @Value("${door.app.queue.heartbeat}")
+    private String appHeartbeatQueue;
 
     @Value("${door.routerKey.heartbeat}")
     private String heartbeatRoutingKey;
@@ -32,7 +33,7 @@ public class HeartbeatRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         // web heartbeat
-        from("rabbitmq:"+exchange+"?queue="+ heartbeatQueue +"&autoDelete=false&declare=false&connectionFactory=#rabbitWebConnectionFactory")
+        from("rabbitmq:"+exchange+"?queue="+ webHeartbeatQueue +"&autoDelete=false&declare=false&connectionFactory=#rabbitWebConnectionFactory")
             .routeId("Web Heartbeat Route")
             .process(e->{
                 e.getMessage().removeHeaders("*");
@@ -68,6 +69,6 @@ public class HeartbeatRoute extends RouteBuilder {
         from("timer://heartbeat?fixedRate=true&delay=0&period=10000")
             .routeId("Heartbeat Route")
             .bean(HeartbeatBean.getInstance(), "packHeartbeatProto")
-            .to("rabbitmq:"+exchange+"?routingKey="+ heartbeatRoutingKey +"&queue="+ heartbeatQueue +"&connectionFactory=#rabbitAppConnectionFactory");
+            .to("rabbitmq:"+exchange+"?routingKey="+ heartbeatRoutingKey +"&queue="+ appHeartbeatQueue +"&connectionFactory=#rabbitAppConnectionFactory");
     }
 }

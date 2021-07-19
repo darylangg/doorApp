@@ -15,8 +15,8 @@ public class StatusRoute extends RouteBuilder {
     @Value("${door.routerKey.status}")
     private String statusRouterKey;
 
-    @Value("${door.queue.status}")
-    private String statusWebQueue;
+    @Value("${door.web.queue.status}")
+    private String webStatusQueue;
 
     @Value("${door.routerKey.csv}")
     private String csvRoutingKey;
@@ -26,7 +26,7 @@ public class StatusRoute extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        from("rabbitmq:"+exchange+"?routingKey="+statusRouterKey+"&queue="+ statusWebQueue +"&autoDelete=false&declare=false&connectionFactory=#rabbitWebConnectionFactory")
+        from("rabbitmq:"+exchange+"?routingKey="+statusRouterKey+"&queue="+ webStatusQueue +"&autoDelete=false&declare=false&connectionFactory=#rabbitWebConnectionFactory")
             .routeId("Status Route")
             .process(e->{
                 e.getMessage().removeHeader(RabbitMQConstants.ROUTING_KEY);

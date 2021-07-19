@@ -13,19 +13,20 @@ public class RPCReplyRoute extends RouteBuilder {
     @Value("${door.routerKey.RPCControlReply}")
     private String RPCReplyRoutingKey;
 
-    @Value("${door.queue.RPCControlReply}")
-    private String RPCReplyQueue;
+    @Value("${door.web.queue.RPCControlReply}")
+    private String webRPCReplyQueue;
+
+    @Value("${door.app.queue.RPCControlReply}")
+    private String appRPCReplyQueue;
 
     @Override
     public void configure() throws Exception {
-        from("rabbitmq:"+exchange+"?queue="+ RPCReplyQueue +"&autoDelete=false&declare=false&connectionFactory=#rabbitWebConnectionFactory")
+        from("rabbitmq:"+exchange+"?queue="+ webRPCReplyQueue +"&autoDelete=false&declare=false&connectionFactory=#rabbitWebConnectionFactory")
             .routeId("RPC Reply Route")
             .process(e->{
-                byte[] data = e.getMessage().getBody(byte[].class);
-                System.out.println(DoorDataProto.RPCReply.parseFrom(data));
                 e.getMessage().removeHeaders("*");
             })
             .log("Reply received")
-            .to("rabbitmq:"+exchange+"?routingKey="+ RPCReplyRoutingKey +"&queue="+ RPCReplyQueue +"&connectionFactory=#rabbitAppConnectionFactory");
+            .to("rabbitmq:"+exchange+"?routingKey="+ RPCReplyRoutingKey +"&queue="+ appRPCReplyQueue +"&connectionFactory=#rabbitAppConnectionFactory");
     }
 }

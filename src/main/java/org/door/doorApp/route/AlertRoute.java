@@ -10,16 +10,19 @@ public class AlertRoute extends RouteBuilder {
     @Value("${door.exchange}")
     private String exchange;
 
-    @Value("${door.queue.alert}")
-    private String alertQueue;
+    @Value("${door.web.queue.alert}")
+    private String webAlertQueue;
+
+    @Value("${door.app.queue.alert}")
+    private String appAlertQueue;
 
     @Value("${door.routerKey.alert}")
     private String alertRoutingKey;
 
     @Override
     public void configure() throws Exception {
-        from("rabbitmq:"+exchange+"?queue="+ alertQueue +"&autoDelete=false&declare=false&connectionFactory=#rabbitWebConnectionFactory")
+        from("rabbitmq:"+exchange+"?queue="+ webAlertQueue +"&autoDelete=false&declare=false&connectionFactory=#rabbitWebConnectionFactory")
             .routeId("Alert Route")
-            .to("rabbitmq:"+exchange+"?routingKey="+ alertRoutingKey +"&queue="+ alertQueue +"&connectionFactory=#rabbitAppConnectionFactory");
+            .to("rabbitmq:"+exchange+"?routingKey="+ alertRoutingKey +"&queue="+ appAlertQueue +"&connectionFactory=#rabbitAppConnectionFactory");
     }
 }
