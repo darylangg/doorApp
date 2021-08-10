@@ -4,6 +4,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.rabbitmq.RabbitMQConstants;
 import org.door.common.protobuf.DoorDataProto;
 import org.door.doorApp.bean.DoorFilterBean;
+import org.door.doorApp.bean.HeartbeatBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -40,5 +41,12 @@ public class StatusRoute extends RouteBuilder {
                 .to("rabbitmq:"+exchange+"?routingKey="+ csvRoutingKey +"&queue="+ csvQueue +"&connectionFactory=#rabbitAppConnectionFactory")
             .otherwise()
                 .log("No new data");
+
+        from("timer://dataFanOut?fixedRate=true&delay=0&period=10000")
+                .routeId("Fan Out Route")
+                .choice().when(method(DoorFilterBean.getInstance(), "hasData"))
+                    .bean(DoorFilterBean.getInstance(),"getLatestData")
+                    .to("rabbitmq:"+exchange+"_data_fanout?exchangeType=fanout&skipQueueDeclare=true&skipQueueBind=true&autoDelete=true&connectionFactory=#rabbitAppConnectionFactory");
+
     }
 }

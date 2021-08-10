@@ -5,6 +5,7 @@ import org.door.common.protobuf.DoorDataProto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -74,6 +75,8 @@ public class DoorFilterBean {
         outgoingData = null;
     }
 
+    public boolean hasData(){return !(mappings.size() == 0);}
+
     public byte[] getLatestUpdate(){
         byte[] retData = outgoingData.toByteArray();
         clearUpdates();
@@ -84,8 +87,16 @@ public class DoorFilterBean {
         outgoingData = incomingData;
     }
 
-    public HashMap<String, DoorDataProto.DoorReading> getMappings() {
-        return mappings;
+    public byte[] getLatestData() {
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        long currentTimestamp = timestamp.getTime();
+        DoorDataProto.DoorData.Builder retDataBuilder = DoorDataProto.DoorData.newBuilder()
+                .setTimestamp(currentTimestamp);
+        for (String deviceID : mappings.keySet()) {
+            DoorDataProto.DoorReading reading = mappings.get(deviceID);
+            retDataBuilder.addDoorReading(reading);
+        }
+        return retDataBuilder.build().toByteArray();
     }
 
     public DoorDataProto.DoorData getLatestDataFromNewArr(List<DoorDataProto.DoorReading> incReadings, long timestamp, long statusCode){
