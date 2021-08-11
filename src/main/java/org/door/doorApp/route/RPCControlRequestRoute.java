@@ -10,7 +10,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RPCRequestRoute extends RouteBuilder {
+public class RPCControlRequestRoute extends RouteBuilder {
     @Value("${door.exchange}")
     private String exchange;
 

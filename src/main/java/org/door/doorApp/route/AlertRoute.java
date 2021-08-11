@@ -5,7 +5,7 @@ import org.door.common.protobuf.DoorDataProto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class AlertRoute extends RouteBuilder {
     @Value("${door.exchange}")
     private String exchange;

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RPCReplyRoute extends RouteBuilder {
+public class RPCControlReplyRoute extends RouteBuilder {
     @Value("${door.exchange}")
     private String exchange;
 
