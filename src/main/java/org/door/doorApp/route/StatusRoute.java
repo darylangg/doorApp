@@ -38,7 +38,7 @@ public class StatusRoute extends RouteBuilder {
             .when(method(DoorFilterBean.getInstance(), "hasUpdates"))
                 .bean(DoorFilterBean.getInstance(), "getLatestUpdate")
                 .log("Sending new data")
-                .to("rabbitmq:"+exchange+"?routingKey="+ csvRoutingKey +"&queue="+ csvQueue +"&connectionFactory=#rabbitAppConnectionFactory")
+                .to("rabbitmq:"+exchange+"_csv?routingKey="+ csvRoutingKey +"&queue="+ csvQueue +"&connectionFactory=#rabbitAppConnectionFactory")
             .otherwise()
                 .log("No new data");
 

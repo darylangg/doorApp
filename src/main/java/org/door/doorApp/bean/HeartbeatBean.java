@@ -51,7 +51,7 @@ public class HeartbeatBean {
     }
 
     public static void updateHeartbeats(){
-        long threshold = 10000; // heartbeat expiry in milliseconds
+        long threshold = 20000; // heartbeat expiry in milliseconds
         for (services service: latestHeartbeats.keySet()){
             long lastTimestamp =(long) latestHeartbeats.get(service).get("timestamp");
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());

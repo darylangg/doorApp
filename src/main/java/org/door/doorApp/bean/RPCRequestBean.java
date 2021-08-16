@@ -14,6 +14,8 @@ import java.util.*;
 public class RPCRequestBean {
     private Logger log = LoggerFactory.getLogger(RPCRequestBean.class);
     private DoorDataProto.RPCRequest latestRequest;
+    private DoorDataProto.RPCReply latestReply;
+    private boolean replied = false;
 
     private static RPCRequestBean instance = null;
 
@@ -25,12 +27,27 @@ public class RPCRequestBean {
     }
 
     public void processRequest(byte[] data) throws InvalidProtocolBufferException {
-//        long now = Instant.now().toEpochMilli()/1000;
-//        String requestID = "door_"+now;
         latestRequest = DoorDataProto.RPCRequest.parseFrom(data);
-//        latestRequest = latestRequest.toBuilder()
-//                .setRequestID(requestID)
-//                .build();
+    }
+
+    public void processReply(byte[] data) throws InvalidProtocolBufferException {
+        DoorDataProto.RPCReply incReply = DoorDataProto.RPCReply.parseFrom(data);
+        if (latestRequest.getRequestID().equals(incReply.getRequestID())){
+            replied = true;
+            latestReply = incReply;
+        }
+        latestRequest = null;
+    }
+
+    public boolean requestCompleted(){
+        return replied;
+    }
+
+    public byte[] getLatestReply(){
+        byte[] out = latestReply.toByteArray();
+        latestReply = null;
+        replied = false;
+        return out;
     }
 
     public void JSONtoRequestProto(HashMap<String, List<String>> data){

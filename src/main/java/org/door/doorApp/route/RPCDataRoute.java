@@ -2,6 +2,7 @@ package org.door.doorApp.route;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.rabbitmq.RabbitMQConstants;
+import org.door.common.utilities.QueuePropertiesReader;
 import org.door.doorApp.bean.DoorFilterBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -17,19 +18,19 @@ public class RPCDataRoute extends RouteBuilder {
     @Value("${door.app.queue.RPCDataRequest}")
     private String RPCDataQueue;
 
+    private String queueProperties;
+
     @Override
     public void configure() throws Exception {
-        from("rabbitmq:"+exchange+"?routingKey="+RPCDataRoutingKey+"&queue="+ RPCDataQueue +"&autoDelete=true&connectionFactory=#rabbitAppConnectionFactory")
+        queueProperties = QueuePropertiesReader.getInstance().getProperties();
+        from("rabbitmq:"+exchange+"?routingKey="+RPCDataRoutingKey+"&queue="+ RPCDataQueue +queueProperties)
             .routeId("RPC Data Route")
+                .log("RPC Data request received")
+                .log("${headers}")
             .choice().when(method(DoorFilterBean.getInstance(), "hasData"))
-            .process(e->{
-                Object routingKey = e.getMessage().getHeader(RabbitMQConstants.REPLY_TO);
-                Object correlationID = e.getMessage().getHeader(RabbitMQConstants.CORRELATIONID);
-                e.getMessage().removeHeaders("*");
-                e.getMessage().setHeader(RabbitMQConstants.CORRELATIONID, correlationID);
-                e.getMessage().setHeader(RabbitMQConstants.ROUTING_KEY, routingKey);
-            })
+            .removeHeaders(RabbitMQConstants.ROUTING_KEY)
+            .log("${headers}")
             .bean(DoorFilterBean.getInstance(),"getLatestData")
-            .to("rabbitmq:"+exchange+"?declare=false&connectionFactory=#rabbitAppConnectionFactory");
+            .to("rabbitmq:"+exchange+"?skipQueueDeclare=true&connectionFactory=#rabbitAppConnectionFactory&exchangePattern=InOnly");
     }
 }
