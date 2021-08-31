@@ -1,6 +1,0 @@
-{
-  "setSkipExchangeDeclare":"true",
-  "autoDelete":"false",
-  "arg.queue.x-queue-type":"quorum",
-  "connectionFactory": "#rabbitAppConnectionFactory"
-}

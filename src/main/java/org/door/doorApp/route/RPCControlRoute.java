@@ -3,12 +3,9 @@ package org.door.doorApp.route;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.rabbitmq.RabbitMQConstants;
-import org.door.common.protobuf.DoorDataProto;
-import org.door.common.utilities.QueuePropertiesReader;
 import org.door.doorApp.bean.HeartbeatBean;
 import org.door.doorApp.bean.RPCRequestBean;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -43,18 +40,24 @@ public class RPCControlRoute extends RouteBuilder {
     @Value("${door.web.queue.RPCControlReply}")
     private String webRPCReplyQueue;
 
-    private String queueProperties;
+    @Value("${door.amqp.app.queue.properties}")
+    private String appQueueProperties;
+
+    @Value("${door.amqp.web.queue.properties}")
+    private String webQueueProperties;
 
     @Override
     public void configure() throws Exception {
-        queueProperties = QueuePropertiesReader.getInstance().getProperties();
-
-        from ("rabbitmq:"+exchange+"?routingKey="+RPCRequestRoutingKey+"&queue="+appRPCRequestQueue+queueProperties)
+        from ("rabbitmq:"+exchange+"?routingKey="+RPCRequestRoutingKey+"&queue="+appRPCRequestQueue+ appQueueProperties)
             .choice().when(method(HeartbeatBean.getInstance(),"servicesConnected"))
                 .log("${headers}")
             // process body
             .routeId("RPC Request Route")
             .bean(RPCRequestBean.getInstance(),"processRequest")
+                .process(e->{
+                    RPCRequestBean.getInstance().setCorrelationID((String) e.getMessage().getHeader(RabbitMQConstants.CORRELATIONID));
+                    RPCRequestBean.getInstance().setReplyTo((String) e.getMessage().getHeader(RabbitMQConstants.REPLY_TO));
+                })
             // get door list if not provided
             .choice().when(method(RPCRequestBean.getInstance(),"isGroupQuery"))
                 .process(e->{
@@ -69,23 +72,27 @@ public class RPCControlRoute extends RouteBuilder {
                 .log("Door list acquired from request")
             .endChoice()
             .end()
-                .log("${headers}")
             .onCompletion().parallelProcessing()
                 .to("direct:sendRequest")
                 .delay(1000)
                 .choice().when(method(RPCRequestBean.getInstance(), "requestCompleted"))
                     .log("Sending Reply...")
+                    .process(e->{
+                        e.getMessage().setHeader(RabbitMQConstants.REPLY_TO,RPCRequestBean.getInstance().getReplyTo());
+                        e.getMessage().setHeader(RabbitMQConstants.CORRELATIONID,RPCRequestBean.getInstance().getCorrelationID());
+                    })
                     .bean(RPCRequestBean.getInstance(), "getLatestReply")
-                    .to("rabbitmq:"+exchange+"?skipQueueDeclare=true&connectionFactory=#rabbitAppConnectionFactory&exchangePattern=InOnly");
+                    //&exchangePattern=InOnly
+                    .to("rabbitmq:"+exchange+"?skipQueueDeclare=true&connectionFactory=#rabbitAppConnectionFactory&autoDelete=false");
 
         from("direct:sendRequest")
             .routeId("Control Request Queue Route")
             .bean(RPCRequestBean.getInstance(),"getLatestRequest")
             .removeHeaders("*")
             .log("Sending Request...")
-            .to("rabbitmq:"+exchange+"?routingKey="+RPCRequestRoutingKey+"&queue="+ webRPCRequestQueue +"&declare=false&connectionFactory=#rabbitWebConnectionFactory");
+            .to("rabbitmq:"+exchange+"?routingKey="+RPCRequestRoutingKey+"&queue="+ webRPCRequestQueue +webQueueProperties);
 
-        from("rabbitmq:"+exchange+"?routingKey="+RPCReplyRoutingKey+"&queue="+ webRPCReplyQueue +"&autoDelete=false&declare=false&connectionFactory=#rabbitWebConnectionFactory")
+        from("rabbitmq:"+exchange+"?routingKey="+RPCReplyRoutingKey+"&queue="+ webRPCReplyQueue +webQueueProperties)
             .bean(RPCRequestBean.getInstance(),"processReply")
             .log("Reply received");
 

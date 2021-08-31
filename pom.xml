@@ -87,7 +87,7 @@
 				<configuration>
 					<excludes>
 						<exclude>**/*.properties</exclude>
-						<exclude>**/*.json</exclude>
+<!--						<exclude>**/*.json</exclude>-->
 						<exclude>certs/*</exclude>
 					</excludes>
 					<archive>

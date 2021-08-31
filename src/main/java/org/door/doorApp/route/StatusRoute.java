@@ -25,9 +25,12 @@ public class StatusRoute extends RouteBuilder {
     @Value("${door.queue.csv}")
     private String csvQueue;
 
+    @Value("${door.amqp.web.queue.properties}")
+    private String webQueueProperties;
+
     @Override
     public void configure() throws Exception {
-        from("rabbitmq:"+exchange+"?routingKey="+statusRouterKey+"&queue="+ webStatusQueue +"&autoDelete=false&declare=false&connectionFactory=#rabbitWebConnectionFactory")
+        from("rabbitmq:"+exchange+"?routingKey="+statusRouterKey+"&queue="+ webStatusQueue +webQueueProperties)
             .routeId("Status Route")
             .process(e->{
                 e.getMessage().removeHeader(RabbitMQConstants.ROUTING_KEY);

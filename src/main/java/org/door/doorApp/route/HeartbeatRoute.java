@@ -3,7 +3,6 @@ package org.door.doorApp.route;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
 import org.door.common.protobuf.HeartbeatProto;
-import org.door.common.utilities.QueuePropertiesReader;
 import org.door.doorApp.bean.HeartbeatBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -31,14 +30,16 @@ public class HeartbeatRoute extends RouteBuilder {
     @Value("${door.database.api.vertical.port}")
     private String DBVerticalAPIPort;
 
-    private String queueProperties;
+    @Value("${door.amqp.app.queue.properties}")
+    private String appQueueProperties;
+
+    @Value("${door.amqp.web.queue.properties}")
+    private String webQueueProperties;
 
     @Override
     public void configure() throws Exception {
-        queueProperties = QueuePropertiesReader.getInstance().getProperties();
-
         // web heartbeat
-        from("rabbitmq:"+exchange+"?queue="+ webHeartbeatQueue +"&autoDelete=false&declare=false&connectionFactory=#rabbitWebConnectionFactory")
+        from("rabbitmq:"+exchange+"?queue="+ webHeartbeatQueue +webQueueProperties)
             .routeId("Web Heartbeat Route")
             .process(e->{
                 e.getMessage().removeHeaders("*");
@@ -74,6 +75,6 @@ public class HeartbeatRoute extends RouteBuilder {
         from("timer://heartbeat?fixedRate=true&delay=0&period=10000")
             .routeId("Heartbeat Route")
             .bean(HeartbeatBean.getInstance(), "packHeartbeatProto")
-            .to("rabbitmq:"+exchange+"?routingKey="+ heartbeatRoutingKey +"&queue="+ appHeartbeatQueue +queueProperties);
+            .to("rabbitmq:"+exchange+"?routingKey="+ heartbeatRoutingKey +"&queue="+ appHeartbeatQueue +appQueueProperties);
     }
 }

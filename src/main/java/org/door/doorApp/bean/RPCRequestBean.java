@@ -17,6 +17,25 @@ public class RPCRequestBean {
     private DoorDataProto.RPCReply latestReply;
     private boolean replied = false;
 
+    public String getReplyTo() {
+        return replyTo;
+    }
+
+    public void setReplyTo(String replyTo) {
+        this.replyTo = replyTo;
+    }
+
+    public String getCorrelationID() {
+        return correlationID;
+    }
+
+    public void setCorrelationID(String correlationID) {
+        this.correlationID = correlationID;
+    }
+
+    private String replyTo;
+    private String correlationID;
+
     private static RPCRequestBean instance = null;
 
     public synchronized static RPCRequestBean getInstance() {

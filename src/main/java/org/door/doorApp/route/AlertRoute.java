@@ -19,6 +19,9 @@ public class AlertRoute extends RouteBuilder {
     @Value("${door.routerKey.alert}")
     private String alertRoutingKey;
 
+    @Value("${door.amqp.app.queue.properties}")
+    private String queueProperties;
+
     @Override
     public void configure() throws Exception {
         from("rabbitmq:"+exchange+"?queue="+ webAlertQueue +"&autoDelete=false&declare=false&connectionFactory=#rabbitWebConnectionFactory")
